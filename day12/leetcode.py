@@ -104,3 +104,27 @@ class Solution:
             else:
                 stack.append(i)
         return True if stack==[] else False
+    
+    
+    #3sum closest
+    
+    class Solution:
+    def threeSumClosest(self, nums: List[int], target: int) -> int:
+        nums.sort()
+        ans = sum(nums[:3])
+        for i in range(len(nums)-2):
+            j, k= i+1, len(sums)-1
+            while j < k:
+                close_sum = nums[i] + nums[j] + nums[k]
+                if close_sum == target:
+                    return close_sum
+                if abs(close_sum - target) < abs(ans - target):
+                    ans = close_sum
+
+                if close_sum < target:
+                    j += 1
+                elif close_sum > target:
+                    k -= 1
+                else:
+                    break
+        return ans
