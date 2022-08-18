@@ -12,4 +12,57 @@ class Solution:
             else:
                 r -= 1
                 
-           
+#roman to integer
+
+class Solution:
+    def romanToInt(self, s: str) -> int:
+        roman_val = {'I':1,'V':5,'X':10,'L':50,'C':100,'D':500,'M':1000}
+        res=0
+        for i in range(len(s)):
+            if i+1 < len(s) and roman_val[s[i]]<roman_val[s[i+1]]:
+                res-=roman_val[s[i]]
+            else:
+                res+=roman_val[s[i]]
+        return res
+            
+#integer to roman
+
+class Solution:
+    def intToRoman(self, num: int) -> str:
+        res=''
+        roman = [['I',1],['IV',4],['V',5],['IX',9],['X',10],['XL',40],['L',50],['XC',90],['C',100],['CD',400],['D',500],['CM',900],['M',1000]]
+        for sym, val in reversed(roman):
+            if num//val:
+                copy = num//val
+                res+=copy*sym
+                num=num%val
+        return res
+            
+#most common word
+
+#bruteforce (TLE)
+class Solution:
+    def maxArea(self, height: List[int]) -> int:
+        maxVol = 0
+        for i in range(len(height)-1):
+            for j in range(i+1,len(height)):
+                spill = min(height[i],height[j])
+                area=spill*(j-i)
+                maxVol =  max(maxVol, area)
+        return maxVol
+    
+#two pointers
+class Solution:
+    def maxArea(self, height: List[int]) -> int:
+        maxVol=0
+        l, r = 0, len(height)-1
+        
+        while l<r:
+            area = (r-l)*min(height[r],height[l])
+            maxVol=max(area,maxVol)
+            
+            if height[l]<height[r]:
+                l+=1
+            else:
+                r-=1
+        return maxVol
