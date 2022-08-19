@@ -11,3 +11,11 @@ class Solution:
       
 #group anagrams
 
+class Solution:
+    def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
+        words = defaultdict(list)
+        for i in strs:
+            words[tuple(sorted(i))].append(i)
+        return list(words.values())
+    
+   
